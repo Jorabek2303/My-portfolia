@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from .models import ContactModel
+from .forms import ContactForms
 
-# Create your views here.
+
+def HomeView(request):
+    
+    
+    return render(request,'index.html',{})
+    
