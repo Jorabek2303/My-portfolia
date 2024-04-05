@@ -1,19 +1,25 @@
 from pathlib import Path
+import os
+import environs
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&m+@fhm$)sh2(ug3l_(hw_0^5z@06)a*@0e6!tdv6pej_u_(fr'
+
+env = environs.Env()
+environs.Env.read_env()
+
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -25,7 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'portfolia'
+    'portfolia',
+    
 ]
 
 MIDDLEWARE = [
@@ -62,11 +69,8 @@ WSGI_APPLICATION = 'MyPortfolia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+DATABASE = {
+    'default' : dj_database_url.parse(env("DATABASE_URL"))
 }
 
 
