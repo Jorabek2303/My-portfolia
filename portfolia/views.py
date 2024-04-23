@@ -16,4 +16,3 @@ def HomeView(request):
     }
     
     return render(request,'index.html',ctx)
-    
